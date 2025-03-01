@@ -23,7 +23,7 @@ class NotesListActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        binding.fab.setOnClickListener{
+        binding.fab.setOnClickListener {
             val intent = Intent(this, NoteEditActivity::class.java)
             startActivity(intent)
         }
@@ -36,8 +36,14 @@ class NotesListActivity : AppCompatActivity() {
 
         content.listNotes.setOnItemClickListener { parent, view, position, id ->
             val intent = Intent(this, NoteEditActivity::class.java)
-            intent.putExtra(EXTRA_NOTE_POS, position)
+            intent.putExtra(NOTE_POSITION, position)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        (content.listNotes.adapter as ArrayAdapter<NoteInfo>).notifyDataSetChanged()
     }
 }

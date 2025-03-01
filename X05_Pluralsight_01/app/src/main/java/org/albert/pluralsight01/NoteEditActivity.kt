@@ -15,7 +15,7 @@ class NoteEditActivity : AppCompatActivity() {
     private lateinit var activityNoteEditBinding: ActivityNoteEditBinding
     private lateinit var contentNoteEditBinding: ContentNoteEditBinding
 
-    private var passedNotePos: Int = EXTRA_NOT_PASSED
+    private var passedNotePos: Int = POSITION_NOT_PASSED
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,13 +34,24 @@ class NoteEditActivity : AppCompatActivity() {
         coursesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         contentNoteEditBinding.spinnerCourses.adapter = coursesAdapter
 
-        passedNotePos = intent.getIntExtra(EXTRA_NOTE_POS, EXTRA_NOT_PASSED)
-        if(passedNotePos != EXTRA_NOT_PASSED)
+        passedNotePos = savedInstanceState?.getInt(NOTE_POSITION, POSITION_NOT_PASSED)
+            ?: intent.getIntExtra(NOTE_POSITION, POSITION_NOT_PASSED)
+
+        if (passedNotePos == POSITION_NOT_PASSED)
+        {
+            DataManager.notes.add(NoteInfo()) // For edit in place
+            passedNotePos = DataManager.notes.lastIndex
+        }
+        else
             displayNote()
     }
 
-    private fun displayNote()
-    {
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(NOTE_POSITION, passedNotePos)
+    }
+
+    private fun displayNote() {
         val note = DataManager.notes[passedNotePos]
         val courseIndex = DataManager.courses.values.indexOf(note.course)
 
@@ -65,6 +76,7 @@ class NoteEditActivity : AppCompatActivity() {
                 next()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -76,13 +88,26 @@ class NoteEditActivity : AppCompatActivity() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        if (passedNotePos == DataManager.notes.lastIndex)
-        {
+        if (passedNotePos == DataManager.notes.lastIndex) {
             val menuItem = menu?.findItem(R.id.action_next)
             menuItem?.icon = AppCompatResources.getDrawable(this, R.drawable.baseline_block_24)
             menuItem?.isEnabled = false
         }
 
         return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        updateNotes()
+    }
+
+    private fun updateNotes() {
+        val idx = passedNotePos
+        val note = DataManager.notes[idx]
+        note.text = contentNoteEditBinding.textNoteContent.text.toString()
+        note.title = contentNoteEditBinding.textNoteTitle.text.toString()
+        note.course = contentNoteEditBinding.spinnerCourses.selectedItem as CourseInfo
     }
 }
