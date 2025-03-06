@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.albert.x07_global_tour.R
 import org.albert.x07_global_tour.databinding.FragmentCityListBinding
 
 class CityListFragment : Fragment() {
@@ -27,8 +28,7 @@ class CityListFragment : Fragment() {
         return binding.root
     }
 
-    private fun setRecyclerView()
-    {
+    private fun setRecyclerView() {
 //        val view = binding.root
         val ctx = requireContext()
         val adapter = CityAdapter(ctx, VacationSpots.cityList!!)

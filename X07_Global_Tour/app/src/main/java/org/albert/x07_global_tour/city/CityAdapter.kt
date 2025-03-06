@@ -10,9 +10,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.albert.x07_global_tour.R
 
-class CityAdapter(private val context: Context, private val cities: ArrayList<City>) :
-    RecyclerView.Adapter<CityAdapter.CityViewHolder>()
-{
+class CityAdapter(val context: Context, var cities: ArrayList<City>) :
+    RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val itemView = LayoutInflater
             .from(context)
@@ -20,18 +19,15 @@ class CityAdapter(private val context: Context, private val cities: ArrayList<Ci
         return CityViewHolder(itemView)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
-
-    override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
+    override fun onBindViewHolder(cityViewHolder: CityViewHolder, position: Int) {
         val city = cities[position]
-        holder.setItem(city, position)
+        cityViewHolder.drawItem(city, position)
     }
 
-    // itemView == list_item_city.xml
-    inner class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    {
+    override fun getItemCount(): Int = cities.size
+
+    inner class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
         var currentPosition = -1
         var currentCity: City? = null
 
@@ -50,23 +46,58 @@ class CityAdapter(private val context: Context, private val cities: ArrayList<Ci
             R.drawable.ic_favorite_bordered,
             null
         )
-        val icDeleteImage = ResourcesCompat.getDrawable(
-            context.resources,
-            R.drawable.ic_delete,
-            null
-        )
+//    val icDeleteImage = ResourcesCompat.getDrawable(
+//        context.resources,
+//        R.drawable.ic_delete,
+//        null
+//    )
 
-        fun setItem(city: City, position: Int) {
+        private fun setListeners() {
+            this.imvDelImage.setOnClickListener(this)
+            this.imvFavImage.setOnClickListener(this)
+        }
+
+        fun drawItem(city: City, position: Int) {
             currentPosition = position
             currentCity = city
 
             txvCityName.text = city.name
             imvCityImage.setImageResource(city.imageId)
-            imvDelImage.setImageDrawable(icDeleteImage)
+//        imvDelImage.setImageDrawable(icDeleteImage)
             if (city.isFavorite)
                 imvFavImage.setImageDrawable(icFavoriteFilledImage)
             else
                 imvFavImage.setImageDrawable(icFavoriteBorderedImage)
+
+            setListeners()
+        }
+
+        override fun onClick(v: View?) {
+            when (v!!.id) {
+                R.id.imv_delete -> deleteItem()
+                R.id.imv_favorite -> favoriteItem()
+            }
+        }
+
+        private fun deleteItem() {
+            cities.removeAt(currentPosition)
+            notifyItemChanged(currentPosition)
+            // Redraw ViewHolder objects from this position onwards.
+            notifyItemRangeChanged(currentPosition, cities.size)
+            // Also remove from fav list
+            VacationSpots.favoriteCityList.remove(currentCity)
+        }
+
+        private fun favoriteItem() {
+            currentCity?.isFavorite = !(currentCity?.isFavorite!!)
+
+            if (currentCity!!.isFavorite) {
+                VacationSpots.favoriteCityList.add(currentCity!!)
+                imvFavImage.setImageDrawable(icFavoriteFilledImage)
+            } else {
+                VacationSpots.favoriteCityList.remove(currentCity!!)
+                imvFavImage.setImageDrawable(icFavoriteBorderedImage)
+            }
         }
     }
 }
