@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="org.albert.x08_viewmodel.MainActivity" >
     <item android:id="@+id/FirstFragment"
-        android:title="@string/action_settings"
+        android:title="First"
         android:orderInCategory="100"
         app:showAsAction="never" />
     <item android:id="@+id/SecondFragment"
-        android:title="@string/action_settings"
+        android:title="Second"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>
