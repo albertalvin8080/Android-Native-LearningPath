@@ -25,4 +25,11 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/ThirdFragment"
+        android:name="org.albert.x08_viewmodel.ThirdFragment"
+        android:label="@string/third_fragment_label"
+        tools:layout="@layout/fragment_third" >
+    </fragment>
 </navigation>

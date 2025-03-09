@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity()
             .getFragment<NavHostFragment>() // NavHostFragment
             .navController // NavController
 
+        val topLevel = setOf(R.id.FirstFragment, R.id.SecondFragment, R.id.ThirdFragment)
+//        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 

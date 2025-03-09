@@ -10,4 +10,8 @@
         android:title="Second"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item android:id="@+id/ThirdFragment"
+        android:title="Third"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 </menu>
