@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer Layer (border) -->
+    <item>
+        <shape>
+            <solid android:color="@android:color/white" /> <!-- Inner background color -->
+            <corners android:radius="5dp" /> <!-- Corner radius for the CardView -->
+            <stroke android:color="#FF0000" android:width="2dp" /> <!-- Red border -->
+        </shape>
+    </item>
+
+    <!-- Inner Layer (CardView content) -->
+    <item android:left="2dp" android:right="2dp" android:top="2dp" android:bottom="2dp">
+        <shape>
+            <solid android:color="@android:color/white" /> <!-- Background color for content -->
+            <corners android:radius="5dp" /> <!-- Inner content corner radius -->
+        </shape>
+    </item>
+</layer-list>
