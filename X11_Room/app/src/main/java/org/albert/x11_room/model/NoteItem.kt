@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class NoteItem(
     @PrimaryKey val id: Int,
     val value: String,
-    val noteListId: Int
+    val noteListId: Int,
+    val itemOrder: Int?
 )

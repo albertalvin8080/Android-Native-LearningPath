@@ -8,11 +8,11 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
     override fun migrate(db: SupportSQLiteDatabase) {
         db.execSQL(
             """
-                CREATE TABLE ´NoteItem´ (
-                    ´id´ INTEGER NOT NULL,
-                    ´value´ TEXT NOT NULL,
-                    ´noteListId´ INTEGER NOT NULL,
-                    PRIMARY KEY(´id´)
+                CREATE TABLE IF NOT EXISTS NoteItem (
+                    id INTEGER NOT NULL,
+                    value TEXT NOT NULL,
+                    noteListId INTEGER NOT NULL,
+                    PRIMARY KEY(id)
                 );
             """.trimIndent()
         )

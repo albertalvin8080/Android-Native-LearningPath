@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import org.albert.x11_room.model.NoteItem
 import org.albert.x11_room.model.NoteList
 
-@Database(entities = [NoteList::class, NoteItem::class], version = 1)
+@Database(entities = [NoteList::class, NoteItem::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun noteListDao(): NoteListDao
     abstract fun noteItemDao(): NoteItemDao
