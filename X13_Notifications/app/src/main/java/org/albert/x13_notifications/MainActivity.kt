@@ -50,38 +50,23 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        checkPermissions()
-    }
-
-    private fun checkPermissions() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.POST_NOTIFICATIONS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-                1
-            )
-        }
-        else
-            ReminderNotification.createNotificationChannel(this)
+        ReminderNotification.createNotificationChannel(this)
     }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray,
-        deviceId: Int
+        grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults, deviceId)
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
+        Log.e(this::class.simpleName, "onRequestPermissionsResult")
         if(requestCode == 1 && grantResults.contains(PackageManager.PERMISSION_GRANTED))
         {
-            ReminderNotification.createNotificationChannel(this)
+//            ReminderNotification.createNotificationChannel(this) // NOT necessary, would create a loop.
         }
         else {
+            Log.e(this::class.simpleName, "TOAST")
             Toast
                 .makeText(this, "PERMISSION DENIED", Toast.LENGTH_SHORT)
                 .show()

@@ -12,5 +12,9 @@ class SecondActivity : AppCompatActivity() {
 
         binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val authorName = intent.getStringExtra("KEY_AUTHOR_NAME")
+        if (authorName != null)
+            binding.msg.text = authorName
     }
 }

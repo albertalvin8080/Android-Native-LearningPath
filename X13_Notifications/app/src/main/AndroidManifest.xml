@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.X13_Notifications"
         tools:targetApi="31">
+        <receiver
+            android:name=".FirstAppWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/first_app_widget_info" />
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -28,8 +41,20 @@
             android:name=".SecondActivity"
             android:exported="true"
             android:label="Second Activity"
-            android:theme="@style/Theme.X13_Notifications.NoActionBar">
-        </activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.X13_Notifications.NoActionBar"/>
+
+        <receiver
+            android:name=".notify.MessageReplyReceiver"
+            android:directBootAware="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".widget.AppWidgetRemoteViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 
 </manifest>

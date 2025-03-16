@@ -14,9 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.albert.x11_room.adapters.NoteListWithNoteItemsAdapter
 import org.albert.x11_room.databinding.ActivityMainBinding
-import org.albert.x11_room.model.NoteItem
-import org.albert.x11_room.model.NoteList
-import org.albert.x11_room.viewholders.NoteListViewModel
+import org.albert.x11_room.viewmodels.NoteListViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

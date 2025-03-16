@@ -1,4 +1,4 @@
-package org.albert.x11_room.viewholders
+package org.albert.x11_room.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
