@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import org.albert.x14_customviews.CustomViewActivity
 import org.albert.x14_customviews.ExtendedViewActivity
 import org.albert.x14_customviews.data.DataColorManager
 import org.albert.x14_customviews.databinding.FragmentHomeBinding
@@ -33,7 +34,8 @@ class HomeFragment : Fragment() {
 
         binding.changeColor.setOnClickListener {
 //            val intent = Intent(requireContext(), CompoundComponentActivity::class.java)
-            val intent = Intent(requireContext(), ExtendedViewActivity::class.java)
+//            val intent = Intent(requireContext(), ExtendedViewActivity::class.java)
+            val intent = Intent(requireContext(), CustomViewActivity::class.java)
             startActivity(intent)
         }
     }
