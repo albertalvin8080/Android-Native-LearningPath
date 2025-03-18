@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/arrowBack"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="14dp"/>
+
+    <View
+        android:id="@+id/selectedColor"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="14dp"/>
+
+    <ImageView
+        android:id="@+id/arrowForward"
+        android:src="@drawable/baseline_arrow_forward_ios_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="14dp"/>
+
+    <CheckBox
+        android:id="@+id/checkColorEnabled"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:checked="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enabled"
+        android:layout_gravity="center_vertical"/>
+</merge>
