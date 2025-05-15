@@ -15,14 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import org.albert.x16_jetpack_concepts.components.CoilImage
-import org.albert.x16_jetpack_concepts.components.GoogleButton
-import org.albert.x16_jetpack_concepts.components.PasswordInput
-import org.albert.x16_jetpack_concepts.components.TextFieldTest
-import org.albert.x16_jetpack_concepts.testing.TestLazyColumn
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import org.albert.x16_jetpack_concepts.navigation.nav_graph.SetUpNavHost
 import org.albert.x16_jetpack_concepts.ui.theme.X16_JetpackConceptsTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var navHostController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -41,7 +41,9 @@ class MainActivity : ComponentActivity() {
 //                            GoogleButton()
 //                            CoilImage()
 //                            PasswordInput()
-                            TestLazyColumn()
+//                            TestLazyColumn()
+                            navHostController = rememberNavController()
+                            SetUpNavHost(navHostController)
                         }
                     }
                 }
