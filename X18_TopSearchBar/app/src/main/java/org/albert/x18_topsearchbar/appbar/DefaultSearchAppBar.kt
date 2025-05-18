@@ -41,7 +41,7 @@ fun DefaultSearchAppBar(
             singleLine = true,
             modifier = Modifier
                 .fillMaxWidth(),
-            onValueChange = { onSearchTriggered() },
+            onValueChange = { },
             placeholder = {
                 Text(
                     text = "Search",
